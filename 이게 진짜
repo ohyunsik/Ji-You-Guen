@@ -1,0 +1,107 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+from matplotlib import font_manager, rc
+font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+rc('font', family=font_name)
+
+%matplotlib inline
+
+o = {'국어':0, 
+     '영어':0, 
+     '심수1':0, 
+     '심수2':0, 
+     '물리':0, 
+     '화학':0, 
+     '생물':0, 
+     '지학':0}
+
+while True:
+    x = input('오늘은 어떤 과목 공부했나요?')
+    if x == '그만' :
+        break
+    y = float(input('몇 시간 공부했나요?'))
+    o[x] =+ y
+    print(o)
+    xx=o.keys()
+    yy=o.values()
+    
+    p = np.arange(8)
+    plt.bar(p, yy)
+    plt.xticks(p, xx)
+    plt.show()
+    
+    
+a = int(input('현재 국어 등급을 입력하세요.'))
+A = int(input('목표 국어 등급을 입력하세요.'))
+aA=a-A
+
+b = int(input('현재 영어 등급을 입력하세요.'))
+B = int(input('목표 영어 등급을 입력하세요.'))
+bB=b-B
+
+c = int(input('현재 심수1 등급을 입력하세요.'))
+C = int(input('목표 심수1 등급을 입력하세요.'))
+cC=c-C
+
+d = int(input('현재 심수2 등급을 입력하세요.'))
+D = int(input('목표 심수2 등급을 입력하세요.'))
+dD=d-D
+
+e = int(input('현재 물리 등급을 입력하세요.'))
+E = int(input('목표 물리 등급을 입력하세요.'))
+eE=e-E
+
+f = int(input('현재 화학 등급을 입력하세요.'))
+F = int(input('목표 화학 등급을 입력하세요.'))
+fF=f-F
+
+g = int(input('현재 생물 등급을 입력하세요.'))
+G = int(input('목표 생물 등급을 입력하세요.'))
+gG=g-G
+
+h = int(input('현재 지학 등급을 입력하세요.'))
+H = int(input('목표 지학 등급을 입력하세요.'))
+hH=h-H
+
+m=o['국어']+o['영어']+o['심수1']+o['심수2']+o['물리']+o['화학']+o['생물']+o['지학']
+n=aA+bB+cC+dD+eE+fF+gG+hH
+
+i = {'국어':o['국어']/m,
+     '영어':o['영어']/m,
+     '심수1':o['심수1']/m,
+     '심수2':o['심수2']/m,
+     '물리':o['물리']/m,
+     '화학':o['화학']/m,
+     '생물':o['생물']/m,
+     '지학':o['지학']/m,}
+
+j = {'국어':aA/n, 
+     '영어':bB/n, 
+     '심수1':cC/n, 
+     '심수2':dD/n, 
+     '물리':eE/n, 
+     '화학':fF/n, 
+     '생물':gG/n, 
+     '지학':hH/n}
+
+
+
+q = {'국어':i['국어']*0.6+j['국어']*0.4,
+     '영어':i['영어']*0.6+j['영어']*0.4,
+     '심수1':i['심수1']*0.6+j['심수1']*0.4,
+     '심수2':i['심수2']*0.6+j['심수2']*0.4,
+     '물리':i['물리']*0.6+j['물리']*0.4,
+     '화학':i['화학']*0.6+j['화학']*0.4,
+     '생물':i['생물']*0.6+j['생물']*0.4,
+     '지학':i['지학']*0.6+j['지학']*0.4,}
+
+plt.axis('equal')
+
+labels = q.keys()
+sizes = q.values()
+
+
+plt.pie(sizes, labels=labels, autopct='%1.1f%%')
+plt.show()
+print('이 정도 비율로 공부해보는건 어떨까요?')
