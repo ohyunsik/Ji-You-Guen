@@ -1,32 +1,34 @@
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt         # 그래프 그리기 위해 matplotlib 불러옴
 import numpy as np
 
-from matplotlib import font_manager, rc
+from matplotlib import font_manager, rc    #그래프 내 폰트 지정. 이쁘게 만드려고 했네
 font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 
 %matplotlib inline
 
-o = {'국어':0,
+o = {'국어':0,        # 현재 누적 공부한 시간을 딕셔너리화 시킴
 '영어':0,
 '심수1':0,
 '심수2':0,
 '물리':0,
 '화학':0,
 '생물':0,
-'지학':0}
+'지학':0,
+'정보':0}
 
-while True:
+
+while True:                 #그날 공부한 과목과 시간을 추가 할 수 있도록 함
 x = input('오늘은 어떤 과목 공부했나요?')
 if x == '그만' :
 break
-y = float(input('몇 시간 공부했나요?'))
+y = float(input('몇 시간 공부했나요?'))   
 o[x] =+ y
 print(o)
 xx=o.keys()
 yy=o.values()
 
-p = np.arange(8)
+p = np.arange(8)            #현재 등급과 목표 등급에 대해 입력하여 적정 공부시간을 추천하게 해주려고 함 (근데 등급은 상위 %가 다른데 어떻게 코드 한줄로 곱 형태로 단순화 시킨거지?)
 plt.bar(p, yy)
 plt.xticks(p, xx)
 plt.show()
@@ -62,8 +64,12 @@ h = int(input('현재 지학 등급을 입력하세요.'))
 H = int(input('목표 지학 등급을 입력하세요.'))
 hH=h-H
 
-m=o['국어']+o['영어']+o['심수1']+o['심수2']+o['물리']+o['화학']+o['생물']+o['지학']
-n=aA+bB+cC+dD+eE+fF+gG+hH
+z = int(input('현재 지학 등급을 입력하세요.'))
+Z = int(input('목표 지학 등급을 입력하세요.'))
+zZ=zZ
+
+m=o['국어']+o['영어']+o['심수1']+o['심수2']+o['물리']+o['화학']+o['생물']+o['지학']+o['정보']
+n=aA+bB+cC+dD+eE+fF+gG+hH+zZ
 
 i = {'국어':o['국어']/m,
 '영어':o['영어']/m,
@@ -72,7 +78,8 @@ i = {'국어':o['국어']/m,
 '물리':o['물리']/m,
 '화학':o['화학']/m,
 '생물':o['생물']/m,
-'지학':o['지학']/m,}
+'지학':o['지학']/m,
+'정보':o['정보']/m}
 
 j = {'국어':aA/n,
 '영어':bB/n,
@@ -81,16 +88,18 @@ j = {'국어':aA/n,
 '물리':eE/n,
 '화학':fF/n,
 '생물':gG/n,
-'지학':hH/n}
+'지학':hH/n,
+'정보':zZ/n}
 
-q = {'국어':i['국어']*0.6+j['국어']*0.4,
+q = {'국어':i['국어']*0.6+j['국어']*0.4,        #
 '영어':i['영어']*0.6+j['영어']*0.4,
 '심수1':i['심수1']*0.6+j['심수1']*0.4,
 '심수2':i['심수2']*0.6+j['심수2']*0.4,
 '물리':i['물리']*0.6+j['물리']*0.4,
 '화학':i['화학']*0.6+j['화학']*0.4,
 '생물':i['생물']*0.6+j['생물']*0.4,
-'지학':i['지학']*0.6+j['지학']*0.4,}
+'지학':i['지학']*0.6+j['지학']*0.4,
+'정보':i['정보']*0.6+j['정보']*0.4,}
 
 plt.axis('equal')
 
@@ -100,3 +109,6 @@ sizes = q.values()
 plt.pie(sizes, labels=labels, autopct='%1.1f%%')
 plt.show()
 print('이 정도 비율로 공부해보는건 어떨까요?')
+
+# 과목별로 필요한 힘듬의 정도와 집중력, 필요 공부의 정도를 수치화 시키는 것은 사람들을 대상으로 설문조사를 한 빅 데이터를 이용해 하는것이 좋을 것 같다. 
+# 등급은 상대평가제이기 때문에 상대적으로 친구들이 많이 공부하지 않는 과목들 같은 경우에는 곱해주는 계수를 다르게 해준다던지의 보정을 해야할 것 같다.
